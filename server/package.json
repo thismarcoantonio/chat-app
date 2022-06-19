@@ -1,0 +1,20 @@
+{
+  "name": "chat-app",
+  "version": "0.0.1",
+  "description": "Simple chat app using socket.io",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon ./app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thismarcoantonio/chat-app.git"
+  },
+  "dependencies": {
+    "dotenv": "^16.0.1",
+    "socket.io": "^4.5.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.16"
+  }
+}
