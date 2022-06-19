@@ -10,5 +10,12 @@ app.innerHTML = `
 
 const button = document.querySelector<HTMLButtonElement>("#startChat");
 button?.addEventListener("click", () => {
-  socket.emit("hello", { username: "Teste" });
+  socket.emit("join-room", {
+    user: { id: "1", name: "teste-user" },
+    roomId: "1",
+  });
+});
+
+socket.on("rooms", (data) => {
+  console.log(data);
 });
