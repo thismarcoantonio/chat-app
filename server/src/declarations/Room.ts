@@ -5,5 +5,4 @@ export interface Room {
   name: string;
   maxUsers: number;
   private: boolean;
-  users: User[];
 }
