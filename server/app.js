@@ -5,7 +5,12 @@ const socketio = require("socket.io");
 dotenv.config();
 
 const server = http.createServer();
-const io = socketio(server);
+const io = socketio(server, {
+  cors: {
+    origin: "*",
+    methods: ["GET", "POST"],
+  },
+});
 const PORT = process.env.PORT;
 
 io.on("connection", (socket) => {
