@@ -5,7 +5,7 @@ import { User } from "../declarations/User";
 import { UserController } from "../controllers/User";
 import { MessageController } from "../controllers/Message";
 
-function rooms(socket: Socket) {
+export default function (socket: Socket) {
   socket.on("message", ({ text }: { text: string }) => {
     const activeUser = UserController.findById(socket.id);
     if (!activeUser) return null;
@@ -18,5 +18,3 @@ function rooms(socket: Socket) {
     });
   });
 }
-
-export default rooms;
