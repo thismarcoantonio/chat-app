@@ -3,12 +3,20 @@ import { logo } from "@/components/logo";
 import { textField } from "@/components/text-field";
 import { arrowRightIcon } from "@/icons/arrow-right";
 import { Room } from "@/declarations/Room";
+import { navigate } from "@/router";
+import { socket } from "@/config";
 
-interface HomeParams {
+export interface HomeParams {
   rooms: Room[];
 }
 
 export function homePage({ rooms }: HomeParams) {
+  const handleJoinRoom = (roomId: Room["id"]) => () => {
+    console.log(roomId);
+    socket.emit("join-room", { username: "test", roomId });
+    navigate("/chat");
+  };
+
   return html`
     <div
       class="mx-auto px-6 pt-10 min-h-screen max-w-screen-lg md:justify-between md:flex md:items-center md:pb-20 md:px-20"
@@ -43,11 +51,14 @@ export function homePage({ rooms }: HomeParams) {
               <div>
                 <p class="font-bold mb-1 text-slate-800">${room.name}</p>
                 <div class="flex items-center text-sm text-slate-600">
-                  <div class="w-1.5 h-1.5 bg-lime-600 rounded-full mr-2"></div>
+                  <div
+                    class="shrink-0 w-1.5 h-1.5 bg-lime-600 rounded-full mr-2"
+                  ></div>
                   5 online now (${room.maxUsers} max)
                 </div>
               </div>
               <button
+                @click="${handleJoinRoom(room.id)}"
                 class="text-slate-800 flex items-center pl-2 pr-1 py-1 rounded transition-colors hover:bg-slate-200"
               >
                 Join ${arrowRightIcon()}
